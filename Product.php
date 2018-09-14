@@ -237,13 +237,11 @@ class Product
     /**
      * Insert new product into product table
      *
-     * @param \Validator $$objValidator
-     *
      * @return bool         true if data is valid and insert into db successfully OR false
      */
-    public function save(Validator $$objValidator)
+    public function save()
     {
-        if(!$this->isValid()){
+        if(!$this->isValid(new Validator($this->arrFieldsMapping))){
             return false;
         }
         $dbConn = new Database($di);
