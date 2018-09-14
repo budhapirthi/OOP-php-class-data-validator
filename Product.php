@@ -12,11 +12,6 @@ class Product
     /**
      * @var
      */
-    private $_intProductId;
-
-    /**
-     * @var
-     */
     private $_strProductCode;
 
     /**
@@ -59,22 +54,12 @@ class Product
      * @var array
      */
     protected $arrFieldsMapping = [
-        'product id'            => ['property_name' => '_intProductId',             'validator' => 'isProductIdValid',          'type' => 'integer',    'required' => true                                       ],
         'product code'          => ['property_name' => '_strProductCode',           'validator' => 'isProductCodeValid',        'type' => 'string',     'required' => true, "min_length" => 4, "max_length" => 20],
         'barcode'               => ['property_name' => '_strProductDescription',    'validator' => 'isBarcodeValid',            'type' => 'integer',    'required' => true, "min_length" => 4, "max_length" => 20],
         'product description'   => ['property_name' => '_strProductDescription',    'validator' => 'isProductDescriptionValid', 'type' => 'string',     'required' => true, "max_length" => 13                   ],
         'product price'         => ['property_name' => '_flProductPrice',           'validator' => 'isProductPriceValid',       'type' => 'float',      'required' => true                                       ],
         'date created'          => ['property_name' => '_dateCreated',              'validator' => 'isDateCreatedValid',        'type' => 'date',       'required' => true                                       ]
     ];
-
-    /**
-     * Product constructor.
-     */
-    public function __construct($intProductId)
-    {
-        $this->_intProductId = $intProductId;
-    }
-
     /**
      * @return mixed
      */
@@ -283,22 +268,22 @@ class Product
         $dbConn = new Database($di);
 
         $strSql  = "INSERT INTO product 
-                                (id, 
-                                 product_code, 
+                                (product_code, 
                                  barcode, 
                                  description, 
                                  price, 
                                  date_created) 
-                    VALUES      (:id, 
-                                 :product_code, 
+                    VALUES      (:product_code, 
                                  :barcode, 
                                  :description, 
                                  :price, 
                                  :date_created) ";
 
-        $arrParameters = ['id' => $this->_intProductId,
-            'product_code' => $this->_strProductCode, 'barcode' => $this->_intBarcode, 'description' => $this->_intBarcode, 'price' => $this->_intBarcode,
-            'date_created' => $this->_dateCreated];
+        $arrParameters = ['product_code' => $this->_strProductCode, 
+                          'barcode' => $this->_intBarcode, 
+                          'description' => $this->_intBarcode, 
+                          'price' => $this->_intBarcode,
+                          'date_created' => $this->_dateCreated];
 
         if (!$dbConn->execute($strSql, $arrParameters)){
             $this->_log->logRequest("Unable to insert product code", [], Level::ALERT);
