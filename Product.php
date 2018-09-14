@@ -63,25 +63,6 @@ class Product
     /**
      * @return mixed
      */
-    public function getProductId()
-    {
-        return $this->_intProductId;
-    }
-
-    /**
-     * @param mixed $intProductId
-     *
-     * @return Product
-     */
-    public function setProductId($intProductId)
-    {
-        $this->_intProductId = (int)$intProductId;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getProductCode()
     {
         return $this->_strProductCode;
