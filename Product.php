@@ -1,5 +1,7 @@
 <?php
-
+namespace Product
+    
+use Library\Validation;
 /**
  * Class Product
  *
