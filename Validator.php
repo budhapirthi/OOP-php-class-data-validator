@@ -1,4 +1,6 @@
 <?php
+namespace Library\Validation;
+
 /**
  * Class Validator
  * This class takes care of generic validation
